@@ -1,0 +1,21 @@
+<mat-card>
+    <span>Change Password</span>
+    <form [formGroup]="editProfForm" (ngSubmit)="onSubmit()">
+        <mat-form-field>
+        <input matInput placeholder="Username" readonly="true" formControlName="userName">
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <input matInput placeholder="Pasword" formControlName="password" type="password">
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+        <input matInput placeholder="Confirm Password" formControlName="confirmPassword" type="password">
+        </mat-form-field>
+        <br>
+        <span *ngIf="editProfForm.errors?.matchingFields">Passwords do not match</span>
+
+        <button mat-raised-button color="primary" [disabled]="!editProfForm.valid">Change</button>&nbsp;
+        <button mat-raised-button color="" (click)="cancel()">Cancel</button>
+    </form>
+</mat-card>

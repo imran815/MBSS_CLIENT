@@ -1,0 +1,35 @@
+<mat-card *ngIf="!authSvc.isAuthenticated">
+    User view is not possible. Please login!!<br/>
+    And yes we have applied this much security to our application ;)
+</mat-card>
+
+<mat-card *ngIf="authSvc.isAuthenticated">
+    <h1>Students Attendance Report</h1>
+
+    <p>
+        The report shows the number of students present in each Level.
+    </p>
+
+    <mat-form-field class="example-full-width">
+        <mat-form-field>
+            <mat-label>Select a date</mat-label>
+            <mat-select [(ngModel)]="selectedDt" (ngModelChange)="chngAttDt()">
+              <mat-option *ngFor="let e of alldates" value="{{e}}">{{e}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+    </mat-form-field>
+  
+    <table id="customers" style="width: 30%;">
+        <tr>
+            <td width="10%" class="cntr">Level</td>
+            <td width="10%">Attendance Taken</td>
+            <td width="20%">Students Present</td>
+        </tr>
+        <tr *ngFor="let x of attendanceCounts" >
+            <td class="cntr">{{x.Level}}</td>
+            <td [ngClass]="{'red':x.AttTaken=='No'}">{{x.AttTaken}}</td>
+            <td>{{x.NumberOfStudents}}</td>
+        </tr>
+    </table>
+
+</mat-card>

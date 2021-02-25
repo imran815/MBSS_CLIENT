@@ -1,0 +1,85 @@
+<header>
+  <nav class='navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3'>
+    <div class="container">
+
+      <a class="navbar-item" *ngIf="!auth.isAuthenticated" [routerLink]='["/login"]'>Login</a>
+      
+      <!-- <div>
+
+          <span *ngIf="auth.isAuthenticated">Welcome <b>{{auth.getUserName}}, </b></span>&nbsp;&nbsp;<br/>
+        </div> -->
+
+      <div *ngIf="userRolelevel == 10">
+        <!-- <a class="navbar-item" *ngIf="userRolelevel >= 2" [routerLink]='["/"]'>Home</a>
+        <span *ngIf="userRolelevel == 10" >&nbsp;|&nbsp;</span> -->
+        <a class="navbar-item" [routerLink]='["/curr-sess-students-info"]' title="Current Session Students Info">Curr Students</a>&nbsp;&nbsp;
+      </div>
+      
+      <button mat-button [matMenuTriggerFor]="menuAll" *ngIf="auth.isAuthenticated">↓ Welcome <b>{{auth.getUserName}},</b></button>
+      <mat-menu #menuAll="matMenu">
+        <button mat-menu-item title="Students to Level Mappings">
+          <a class="nav-link text-dark nav-item" [routerLink]='["/"]' title="All Students">
+            Home</a>
+        </button>
+        <button mat-menu-item>
+            <a class="nav-link text-dark nav-item" [routerLink]='["/edit-profile"]'>
+            Change Password</a>
+        </button>
+        <button mat-menu-item>
+            <a class="nav-link text-dark nav-item" title="logout" (click)="logout()">
+              Logout</a>
+        </button>
+      </mat-menu>
+
+
+        <button mat-button [matMenuTriggerFor]="menuM" *ngIf="userRolelevel >= 8">↓ Main Menu</button>
+        <mat-menu #menuM="matMenu">
+          <button mat-menu-item title="Students to Level Mappings">
+            <a class="nav-link text-dark nav-item" [routerLink]='["/students-info"]' title="All Students">
+              All Students</a>
+          </button>
+          <button mat-menu-item>
+              <a class="nav-link text-dark nav-item" [routerLink]='["/teachers"]' title="Teachers">
+                Teachers</a>
+          </button>
+          <button mat-menu-item>
+              <a class="nav-link text-dark nav-item" [routerLink]='["/teacher-level-mapping"]' title="Assign Teacher to Level">
+                Assign Teacher to Level</a>
+          </button>
+        </mat-menu>
+
+        <button mat-button [matMenuTriggerFor]="menu"  *ngIf="userRolelevel >= 2" >↓ Teacher Menu</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item title="Students to Level Mappings">
+            <!-- Assign Students -->
+            <a class="nav-link text-dark nav-item" [routerLink]='["/level-student-mapping"]' title="Students to Level Mappings">
+              Assign Students</a>
+          </button>
+          <button mat-menu-item>
+              <a class="nav-link text-dark nav-item" [routerLink]='["/attendance"]' title="Students Attendance">
+                Attendance</a>
+          </button>
+          <button mat-menu-item *ngIf="userRolelevel >= 8">
+              <a class="nav-link text-dark nav-item" [routerLink]='["/attendance-counts"]' title="Students Attendance By Level">
+                Attendance Report</a>
+          </button>
+          <button mat-menu-item *ngIf="userRolelevel == 2">
+            <a class="nav-link text-dark nav-item" [routerLink]='["/attendance-grand-report"]' title="Students Attendance">
+              Attendance All</a>
+        </button>
+      </mat-menu>
+
+        <!-- <a class="navbar-item" *ngIf="auth.isAuthenticated" [routerLink]='["/edit-profile"]'>Change Password</a>&nbsp;&nbsp; -->
+        
+        <a class="navbar-item" *ngIf="auth.isAuthenticated" [routerLink]='["/"]' (click)="logout()">Logout</a>
+
+        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" [ngClass]='{"show": isExpanded}'>
+        <ul class="navbar-nav flex-grow">
+          
+
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+</header>

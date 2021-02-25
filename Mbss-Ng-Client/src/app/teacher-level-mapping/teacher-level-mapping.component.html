@@ -1,0 +1,51 @@
+<mat-card *ngIf="!authSvc.isAuthenticated">
+        User view is not possible. Please login!!<br/>
+        And yes we have applied this much security to our application ;)
+    </mat-card>
+    <mat-card *ngIf="authSvc.isAuthenticated">
+<h1>Teachers to Levels Mapping</h1>
+
+<p>This shows levels and teachers mapping.</p>
+
+<p *ngIf="!levelsInfo"><em>Loading...</em></p>
+
+<mat-card>
+    <form (ngSubmit)="onSubmit()">
+<table cellpadding="0" cellspacing="0" border="0" width="70%">
+    <tr>
+        <td width="30%" valign="top">
+            <mat-form-field>
+                <mat-label>Levels</mat-label>
+                <mat-select [formControl]="levelsControl" (ngModelChange)="onLevelSelection()">
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let lvlInfo of levelsInfo" [value]="lvlInfo">
+                    {{lvlInfo.LevelRank}}
+                  </mat-option>
+                </mat-select>
+                <!-- <mat-error *ngIf="animalControl.hasError('required')">Please choose an animal</mat-error> -->
+                <mat-hint>{{levelsControl.value?.TeacherNames}}</mat-hint>
+            </mat-form-field>
+            
+        </td>
+        <td width="40%">
+            <mat-selection-list #teachersInfom  
+            (selectionChange)="onSelection($event,teachersInfom.selectedOptions.selected)">
+                <mat-list-option *ngFor="let tchr of teachersInfo"  [selected]="tchr.selected" [value]="tchr.TeacherID">
+                  {{tchr.TeacherName}}
+                </mat-list-option>
+              </mat-selection-list>
+              
+              <p [hidden]="!teachersInfo">
+                Options selected: {{teachersInfom.selectedOptions.selected.length}}
+              </p>
+        </td>
+    </tr>
+</table>
+
+<!-- [disabled]="!entryForm.valid" -->
+<button mat-raised-button color="primary" [disabled]="!levelsControl.value">Add Mapping</button>
+
+</form>
+</mat-card>
+
+</mat-card>

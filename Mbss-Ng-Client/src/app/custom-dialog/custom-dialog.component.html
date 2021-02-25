@@ -1,0 +1,8 @@
+<h2 mat-dialog-title >{{pgTitle}} </h2>
+<!-- *ngIf="!sd" -->
+<mat-dialog-content>{{pgDesc}} </mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button *ngIf="btnNo" mat-dialog-close (click)="No()">{{btnNo}}</button>
+  <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+  <button mat-button *ngIf="btnYes" [mat-dialog-close]="true" (click)="Yes()">{{btnYes}}</button>
+</mat-dialog-actions>

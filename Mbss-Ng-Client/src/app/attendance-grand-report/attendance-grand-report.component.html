@@ -1,0 +1,23 @@
+<mat-card *ngIf="!authSvc.isAuthenticated">
+    User view is not possible. Please login!!<br/>
+    And yes we have applied this much security to our application ;)
+</mat-card>
+
+<mat-card *ngIf="authSvc.isAuthenticated">
+    <h1>Attendance Grand Report</h1>
+
+    <p>
+        The report shows the student's grand attendance report.
+    </p>
+  
+    <table id="customers" style="width: 30%;">
+        <tr>
+            <td *ngFor="let head of filteredKeys">{{head}}</td>
+        </tr>
+
+        <tr *ngFor="let object of attendanceInfo" >
+            <td *ngFor="let key of filteredKeys">{{object[key]}}</td>
+        </tr>
+    </table>
+
+</mat-card>

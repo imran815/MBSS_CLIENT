@@ -1,0 +1,13 @@
+<mat-card>
+    <span>Sign In</span>
+    <br/>
+    <mat-form-field>
+        <input matInput placeholder="UserName" [(ngModel)]="loginData.UserName" type="text"> 
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Password" [(ngModel)]="loginData.Password" type="password" 
+        (keyup.enter)="login()">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="login()">Login</button>&nbsp;
+    <button mat-raised-button color="" (click)="cancel()">Cancel</button>
+</mat-card>
